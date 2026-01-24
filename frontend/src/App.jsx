@@ -1,13 +1,17 @@
+import { useState } from "react";
 import { useFetchData } from "./utils/useFetchData.js";
+import SearchInput from "./components/SearchInput/SearchInput.jsx";
 
 function App() {
-  const city = "Vilnius";
-  const lat = 54.6872;
-  const lon = 25.2797;
+  const [cityData, setCityData] = useState({
+    name: "Vilnius",
+    lat: 54.6872,
+    lon: 25.2797,
+  });
 
   const { data, current, loading, error } = useFetchData({
-    latitude: lat,
-    longitude: lon,
+    latitude: cityData.lat,
+    longitude: cityData.lon,
     timezone: "auto",
     hourly: [
       "temperature_2m",
@@ -25,6 +29,10 @@ function App() {
 
   return (
     <>
+      <h1>OpenMeteo</h1>
+
+      <SearchInput onSelect={(place) => setCityData(place)} />
+
       {error && <p>Error: {error}</p>}
       {loading && !data && <p>Loading...</p>}
 
@@ -32,7 +40,7 @@ function App() {
         <div>
           <div>
             <div>
-              <p>{city}</p>
+              <p>{cityData.name}</p>
               <p>
                 {new Date(time).toLocaleString(undefined, {
                   weekday: "long",
@@ -42,8 +50,10 @@ function App() {
                 })}
               </p>
             </div>
+
             <p>Temperature: {temperature} °C</p>
           </div>
+
           <div>
             <p>Cloud cover: {clouds} %</p>
             <p>Wind: {wind} m/s</p>

@@ -1,0 +1,41 @@
+@use "../../styles/variables" as *;
+
+.container {
+  label {
+    display: block;
+    margin-bottom: $space-xs;
+    font-weight: 600;
+  }
+  input {
+    display: inline-block;
+    padding: $space-xs;
+    border: 2px solid $primary-color;
+    border-radius: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
+    color: $primary-color;
+  }
+  ul {
+    position: absolute;
+    background-color: $light-color;
+    box-shadow: 2px 2px 7px $light-shadow;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style: none;
+    color: $primary-color;
+    button {
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      padding: $space-xs;
+      box-sizing: border-box;
+      text-align: left;
+      &:hover,
+      &:focus {
+        background-color: $primary-color-light-hover;
+      }
+    }
+  }
+}
