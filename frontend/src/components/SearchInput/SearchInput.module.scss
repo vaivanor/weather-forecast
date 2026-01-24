@@ -1,12 +1,15 @@
 @use "../../styles/variables" as *;
 
 .container {
+  position: relative;
+  margin-bottom: $space-base;
   label {
     display: block;
     margin-bottom: $space-xs;
     font-weight: 600;
   }
   input {
+    position: relative;
     display: inline-block;
     padding: $space-xs;
     border: 2px solid $primary-color;
@@ -17,6 +20,7 @@
   }
   ul {
     position: absolute;
+    box-sizing: border-box;
     background-color: $light-color;
     box-shadow: 2px 2px 7px $light-shadow;
     padding: 0;

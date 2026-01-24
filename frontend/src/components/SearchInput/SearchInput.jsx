@@ -28,12 +28,12 @@ export default function SearchInput({ onSelect }) {
   };
 
   const pickCity = (place) => {
-    setQuery(place.name);
+    setQuery("");
     setSuggestions([]);
     onSelect?.({
       name: place.name,
-      lat: place.latitude,
-      lon: place.longitude,
+      admin1: place.admin1 ?? null,
+      admin2: place.admin2 ?? null,
     });
   };
 
@@ -51,7 +51,9 @@ export default function SearchInput({ onSelect }) {
         <ul>
           {suggestions.map((s) => (
             <li key={`${s.name}-${s.latitude}`}>
-              <button onClick={() => pickCity(s)}>{s.name}</button>
+              <button onClick={() => pickCity(s)}>
+                {s.name}, {s.admin1}
+              </button>
             </li>
           ))}
         </ul>
