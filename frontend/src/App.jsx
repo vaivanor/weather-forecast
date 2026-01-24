@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 
+const findNearestIndex = (times) => {
+  const now = new Date();
+  return times.reduce((bestIdx, t, i) => {
+    const bestTime = new Date(times[bestIdx]);
+    return Math.abs(new Date(t) - now) < Math.abs(bestTime - now) ? i : bestIdx;
+  }, 0);
+};
+
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -35,12 +43,13 @@ function App() {
     } = hourly ?? {};
     if (!time?.length) return null;
 
+    const i = findNearestIndex(time);
     return {
-      time: time[0],
-      temperature: temperature_2m?.[0],
-      wind: wind_speed_10m?.[0],
-      humidity: relative_humidity_2m?.[0],
-      clouds: cloud_cover?.[0],
+      time: time[i],
+      temperature: temperature_2m?.[i],
+      wind: wind_speed_10m?.[i],
+      humidity: relative_humidity_2m?.[i],
+      clouds: cloud_cover?.[i],
     };
   }, [data]);
 
