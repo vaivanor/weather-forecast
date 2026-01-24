@@ -6,4 +6,15 @@ body {
   color: $primary-color;
   margin: 0;
   padding: 0;
+  h1,
+  h2,
+  h3,
+  p {
+    padding: 0;
+    margin: 0;
+    margin: $space-xs;
+  }
+  main {
+    margin: $space-base;
+  }
 }
