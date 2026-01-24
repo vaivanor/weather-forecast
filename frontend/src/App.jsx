@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFetchData } from "./utils/useFetchData.js";
 import SearchInput from "./components/SearchInput/SearchInput.jsx";
+import { CurrentDayCard } from "./components/CurrentDayCard/CurrentDayCard.jsx";
 
 function App() {
   const [cityData, setCityData] = useState({
@@ -31,36 +32,24 @@ function App() {
     <>
       <h1>OpenMeteo</h1>
 
-      <SearchInput onSelect={(place) => setCityData(place)} />
+      <main>
+        <SearchInput onSelect={(place) => setCityData(place)} />
 
-      {error && <p>Error: {error}</p>}
-      {loading && !data && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+        {loading && !data && <p>Loading...</p>}
 
-      {data && current && (
-        <div>
-          <div>
-            <div>
-              <p>{cityData.name}</p>
-              <p>
-                {new Date(time).toLocaleString(undefined, {
-                  weekday: "long",
-                  month: "short",
-                  day: "numeric",
-                  timeZone: data?.timezone,
-                })}
-              </p>
-            </div>
-
-            <p>Temperature: {temperature} °C</p>
-          </div>
-
-          <div>
-            <p>Cloud cover: {clouds} %</p>
-            <p>Wind: {wind} m/s</p>
-            <p>Humidity: {humidity} %</p>
-          </div>
-        </div>
-      )}
+        {data && current && (
+          <CurrentDayCard
+            time={time}
+            data={data}
+            cityData={cityData}
+            temperature={temperature}
+            clouds={clouds}
+            wind={wind}
+            humidity={humidity}
+          />
+        )}
+      </main>
     </>
   );
 }

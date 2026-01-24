@@ -1,4 +1,4 @@
-import style from "./GridWrapper.module.css";
+import style from "./GridWrapper.module.scss";
 
 export const GridWrapper = ({ children, columns = 2, customStyle }) => {
   return (
