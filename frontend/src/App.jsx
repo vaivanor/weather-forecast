@@ -1,62 +1,32 @@
-import { useEffect, useMemo, useState } from "react";
-
-const findNearestIndex = (times) => {
-  const now = new Date();
-  return times.reduce((bestIdx, t, i) => {
-    const bestTime = new Date(times[bestIdx]);
-    return Math.abs(new Date(t) - now) < Math.abs(bestTime - now) ? i : bestIdx;
-  }, 0);
-};
+import { useFetchData } from "./utils/useFetchData.js";
 
 function App() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
   const city = "Vilnius";
   const lat = 54.6872;
   const lon = 25.2797;
 
-  useEffect(() => {
-    const url =
-      "https://api.open-meteo.com/v1/forecast" +
-      `?latitude=${lat}&longitude=${lon}` +
-      "&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,cloud_cover" +
-      "&timezone=auto";
+  const { data, current, loading, error } = useFetchData({
+    latitude: lat,
+    longitude: lon,
+    timezone: "auto",
+    hourly: [
+      "temperature_2m",
+      "relative_humidity_2m",
+      "wind_speed_10m",
+      "cloud_cover",
+    ],
+  });
 
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) throw new Error("HTTP error: " + res.status);
-        return res.json();
-      })
-      .then((json) => setData(json))
-      .catch((err) => setError(err.message));
-  }, [lat, lon]);
-
-  const current = useMemo(() => {
-    const { hourly } = data ?? {};
-    const {
-      time,
-      temperature_2m,
-      wind_speed_10m,
-      relative_humidity_2m,
-      cloud_cover,
-    } = hourly ?? {};
-    if (!time?.length) return null;
-
-    const i = findNearestIndex(time);
-    return {
-      time: time[i],
-      temperature: temperature_2m?.[i],
-      wind: wind_speed_10m?.[i],
-      humidity: relative_humidity_2m?.[i],
-      clouds: cloud_cover?.[i],
-    };
-  }, [data]);
+  const time = current?.time;
+  const temperature = current?.values?.temperature_2m;
+  const wind = current?.values?.wind_speed_10m;
+  const humidity = current?.values?.relative_humidity_2m;
+  const clouds = current?.values?.cloud_cover;
 
   return (
     <>
       {error && <p>Error: {error}</p>}
-      {!error && !data && <p>Loading...</p>}
+      {loading && !data && <p>Loading...</p>}
 
       {data && current && (
         <div>
@@ -64,7 +34,7 @@ function App() {
             <div>
               <p>{city}</p>
               <p>
-                {new Date(current.time).toLocaleString(undefined, {
+                {new Date(time).toLocaleString(undefined, {
                   weekday: "long",
                   month: "short",
                   day: "numeric",
@@ -72,12 +42,12 @@ function App() {
                 })}
               </p>
             </div>
-            <p>Temperature: {current.temperature} °C</p>
+            <p>Temperature: {temperature} °C</p>
           </div>
           <div>
-            <p>Cloud cover: {current.clouds} %</p>
-            <p>Wind: {current.wind} m/s</p>
-            <p>Humidity: {current.humidity} %</p>
+            <p>Cloud cover: {clouds} %</p>
+            <p>Wind: {wind} m/s</p>
+            <p>Humidity: {humidity} %</p>
           </div>
         </div>
       )}
