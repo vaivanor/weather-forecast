@@ -3,19 +3,15 @@
 Weather website that shows the current and 5‑day forecast for selected city, with quick-select shortcuts from localStorage and backend logging of every user selection.
 
 Desktop view:
-
-<img width="958" height="535" alt="Image" src="https://github.com/user-attachments/assets/7e2fc1b1-3730-4cc0-9b81-e1e2b674c1e3" />
+<img width="758" height="335" alt="Image" src="https://github.com/user-attachments/assets/7e2fc1b1-3730-4cc0-9b81-e1e2b674c1e3" />
 
 Mobile view:
-
 <img width="212" height="464" alt="Image" src="https://github.com/user-attachments/assets/89b65e84-571a-4fed-9f4b-ae35d72466b7" />
 
 Node.js console log:
-
 <img width="317" height="83" alt="Image" src="https://github.com/user-attachments/assets/1dfeac08-d32e-46a9-bccf-f46c8f36d962" />
 
 MongoDB insert:
-
 <img width="307" height="73" alt="Image" src="https://github.com/user-attachments/assets/efdb44e3-d10f-41ba-9f3c-c7c3c7175c78" />
 
 ### Versions
