@@ -1,11 +1,17 @@
-import { saveCityToLocalStorage } from "../../utils/saveCityToLocalStorage.js";
+import { useEffect, useState } from "react";
 import style from "./SearchInput.module.scss";
-import { useState } from "react";
+import { saveCityToLocalStorage } from "../../utils/saveCityToLocalStorage.js";
+import { getTopCities } from "../../utils/getTopCities.js";
 import { fetchData } from "../../utils/useFetchData.js";
 
 export const SearchInput = ({ onSelect }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [topCities, setTopCities] = useState([]);
+
+  useEffect(() => {
+    setTopCities(getTopCities(3));
+  }, []);
 
   const handleInput = async (value) => {
     setQuery(value);
@@ -31,14 +37,17 @@ export const SearchInput = ({ onSelect }) => {
 
   const pickCity = async (place) => {
     saveCityToLocalStorage(place);
+    setTopCities(getTopCities(3));
+
     setQuery("");
     setSuggestions([]);
+
     onSelect?.({
       name: place.name,
       admin1: place.admin1 ?? null,
       admin2: place.admin2 ?? null,
-      lat: place.latitude,
-      lon: place.longitude,
+      lat: place.latitude ?? place.lat,
+      lon: place.longitude ?? place.lon,
     });
 
     const res = await fetchData("http://localhost:3000/log", "POST", {
@@ -47,6 +56,27 @@ export const SearchInput = ({ onSelect }) => {
 
     if (!res.ok) {
       return;
+    }
+  };
+
+  const handleQuickPick = async (cityName) => {
+    try {
+      const url =
+        "https://geocoding-api.open-meteo.com/v1/search?name=" +
+        encodeURIComponent(cityName) +
+        "&count=1&language=lt&countryCode=LT";
+      const res = await fetch(url);
+      const json = await res.json();
+      const first = json?.results?.[0];
+
+      if (first) {
+        await pickCity(first);
+      } else {
+        setQuery(cityName);
+        await handleInput(cityName);
+      }
+    } catch (err) {
+      console.error("Quick pick geocoding error:", err);
     }
   };
 
@@ -65,11 +95,25 @@ export const SearchInput = ({ onSelect }) => {
           {suggestions.map((s) => (
             <li key={`${s.name}-${s.latitude}-${s.longitude}`}>
               <button onClick={() => pickCity(s)}>
-                {s.name}, {s.admin1}
+                {s.name}
+                {s.admin1 ? `, ${s.admin1}` : ""}
               </button>
             </li>
           ))}
         </ul>
+      )}
+
+      {topCities.length > 0 && (
+        <div className={style.flexContainer}>
+          {topCities.map((c) => (
+            <button
+              key={`top-${c.name}`}
+              onClick={() => handleQuickPick(c.name)}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
