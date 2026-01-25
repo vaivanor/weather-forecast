@@ -87,6 +87,17 @@ MongoDB insert:
 
 - **README.md** – Project documentation
 
+#### Back-end
+
+- **controllers/** – Handles business logic for API routes
+- **middlewares/** – Custom middleware
+- **routes/** – API route definitions
+- **validations/** – Joi schemas
+- **.env** – Environment variables (excluded from repo)
+- **index.js** – Application entry point
+- **package.json** – Project metadata and scripts
+- **pnpm-lock.yaml** – Dependency lock file
+
 #### Front-end
 
 - **src/**
@@ -100,14 +111,3 @@ MongoDB insert:
 - **package.json** – Project metadata and scripts
 - **pnpm-lock.yaml** – Dependency lock file
 - **vite.config.js** – Vite configuration
-
-#### Back-end
-
-- **controllers/** – Handles business logic for API routes
-- **middlewares/** – Custom middleware
-- **routes/** – API route definitions
-- **validations/** – Joi schemas
-- **.env** – Environment variables (excluded from repo)
-- **index.js** – Application entry point
-- **package.json** – Project metadata and scripts
-- **pnpm-lock.yaml** – Dependency lock file
