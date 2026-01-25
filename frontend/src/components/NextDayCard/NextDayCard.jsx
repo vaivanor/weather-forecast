@@ -1,8 +1,6 @@
 import { GridWrapper } from "../GridWrapper/GridWrapper.jsx";
 import style from "./NextDayCard.module.scss";
 
-const toNoon = (dateStr) => `${dateStr}T12:00:00`;
-
 export const NextDayCard = ({
   date,
   data,

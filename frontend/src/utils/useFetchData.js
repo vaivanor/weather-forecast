@@ -1,4 +1,4 @@
-export async function fetchData(url, method = "GET", body = null) {
+export const fetchData = async (url, method = "GET", body = null) => {
   try {
     const response = await fetch(url, {
       method,
@@ -27,4 +27,4 @@ export async function fetchData(url, method = "GET", body = null) {
       data: null,
     };
   }
-}
+};

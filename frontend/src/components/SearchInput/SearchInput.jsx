@@ -1,7 +1,9 @@
+import { saveCityToLocalStorage } from "../../utils/saveCityToLocalStorage.js";
 import style from "./SearchInput.module.scss";
 import { useState } from "react";
+import { fetchData } from "../../utils/useFetchData.js";
 
-export default function SearchInput({ onSelect }) {
+export const SearchInput = ({ onSelect }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -27,7 +29,8 @@ export default function SearchInput({ onSelect }) {
     }
   };
 
-  const pickCity = (place) => {
+  const pickCity = async (place) => {
+    saveCityToLocalStorage(place);
     setQuery("");
     setSuggestions([]);
     onSelect?.({
@@ -37,6 +40,14 @@ export default function SearchInput({ onSelect }) {
       lat: place.latitude,
       lon: place.longitude,
     });
+
+    const res = await fetchData("http://localhost:3000/log", "POST", {
+      city: place.name,
+    });
+
+    if (!res.ok) {
+      return;
+    }
   };
 
   return (
@@ -62,4 +73,4 @@ export default function SearchInput({ onSelect }) {
       )}
     </div>
   );
-}
+};

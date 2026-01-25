@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMeteoData } from "./utils/useMeteoData.js";
-import SearchInput from "./components/SearchInput/SearchInput.jsx";
+import { SearchInput } from "./components/SearchInput/SearchInput.jsx";
 import { CurrentDayCard } from "./components/CurrentDayCard/CurrentDayCard.jsx";
 import { Header } from "./components/Header/Header.jsx";
 import { NextDayCard } from "./components/NextDayCard/NextDayCard.jsx";
