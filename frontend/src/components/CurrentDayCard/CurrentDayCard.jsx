@@ -24,12 +24,12 @@ export const CurrentDayCard = ({
                 timeZone: data?.timezone,
               })}
             </p>
-            <h2 className={style.temperature}>{temperature} °C</h2>
+            <h2 className={style.temperature}>{temperature.toFixed(0)} °C</h2>
           </div>
         </div>
         <div className={style.flexContainer}>
           <p>
-            Cloud cover: <b>{clouds} %</b>
+            Clouds: <b>{clouds} %</b>
           </p>
           <p>
             Wind: <b>{wind} m/s</b>

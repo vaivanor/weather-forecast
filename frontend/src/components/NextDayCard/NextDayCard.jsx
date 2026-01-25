@@ -38,7 +38,7 @@ export const NextDayCard = ({
 
         <div className={style.flexContainer}>
           <p>
-            Cloud cover: <b>{cloudsMean} %</b>
+            Clouds: <b>{cloudsMean} %</b>
           </p>
           <p>
             Wind: <b>{windMax} m/s</b>

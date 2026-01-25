@@ -20,5 +20,11 @@ body {
   }
   main {
     margin: $space-m $space-base;
+    @media (min-width: 768px) {
+      margin: $space-m $space-l;
+    }
+    @media (min-width: 1200px) {
+      margin: $space-m $space-xl;
+    }
   }
 }
