@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMeteoData } from "./utils/useMeteoData.js";
 import SearchInput from "./components/SearchInput/SearchInput.jsx";
 import { CurrentDayCard } from "./components/CurrentDayCard/CurrentDayCard.jsx";
+import { Header } from "./components/Header/Header.jsx";
 
 function App() {
   const [cityData, setCityData] = useState({
@@ -30,8 +31,7 @@ function App() {
 
   return (
     <>
-      <h1>OpenMeteo</h1>
-
+      <Header />
       <main>
         <SearchInput onSelect={(place) => setCityData(place)} />
 

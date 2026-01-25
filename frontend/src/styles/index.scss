@@ -6,6 +6,7 @@ body {
   color: $primary-color;
   margin: 0;
   padding: 0;
+  background-color: $background-color;
   h1,
   h2,
   h3,
@@ -15,6 +16,6 @@ body {
     margin: $space-xs;
   }
   main {
-    margin: $space-base;
+    margin: $space-m $space-base;
   }
 }
