@@ -81,12 +81,14 @@ MongoDB insert:
 
 ### Project Structure
 
+- **README.md** – Project documentation
+
 #### Front-end
 
 - **src/**
   - **components/** – Reusable UI components
-  - **styles/** – SCSS variables App.scss and index.scss
-  - **utils/** – Reusable custom hooks and helpers
+  - **styles/** – SCSS variables, App.scss, index.scss
+  - **utils/** – Custom hooks and helpers
   - **App.jsx** – Main App component
   - **main.jsx** – Entry point
 - **index.html** – Main HTML entry point
@@ -98,12 +100,10 @@ MongoDB insert:
 #### Back-end
 
 - **controllers/** – Handles business logic for API routes
-- **middlewares/** – Custom middlewar
+- **middlewares/** – Custom middleware
 - **routes/** – API route definitions
 - **validations/** – Joi schemas
-- **.env** – Environment variables (not included in repo)
+- **.env** – Environment variables (excluded from repo)
 - **index.js** – Application entry point
 - **package.json** – Project metadata and scripts
 - **pnpm-lock.yaml** – Dependency lock file
-
-- **README.md** – Project documentation
