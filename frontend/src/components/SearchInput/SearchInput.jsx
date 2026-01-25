@@ -1,5 +1,6 @@
 import style from "./SearchInput.module.scss";
 import { useState } from "react";
+import { fetchData } from "../../utils/useFetchData";
 
 export default function SearchInput({ onSelect }) {
   const [query, setQuery] = useState("");
@@ -27,14 +28,23 @@ export default function SearchInput({ onSelect }) {
     }
   };
 
-  const pickCity = (place) => {
+  const pickCity = async (place) => {
     setQuery("");
     setSuggestions([]);
+
     onSelect?.({
       name: place.name,
       admin1: place.admin1 ?? null,
       admin2: place.admin2 ?? null,
     });
+
+    const res = await fetchData("http://localhost:3000/log", "POST", {
+      city: place.name,
+    });
+
+    if (!res.ok) {
+      return;
+    }
   };
 
   return (
@@ -51,8 +61,9 @@ export default function SearchInput({ onSelect }) {
         <ul>
           {suggestions.map((s) => (
             <li key={`${s.name}-${s.latitude}`}>
-              <button onClick={() => pickCity(s)}>
-                {s.name}, {s.admin1}
+              <button type="button" onClick={() => pickCity(s)}>
+                {s.name}
+                {s.admin1 ? `, ${s.admin1}` : ""}
               </button>
             </li>
           ))}
