@@ -4,7 +4,7 @@ Weather website that shows the current and 5‑day forecast for selected city, w
 
 Desktop view:
 
-<img width="758" height="335" alt="Image" src="https://github.com/user-attachments/assets/7e2fc1b1-3730-4cc0-9b81-e1e2b674c1e3" />
+<img width="958" height="535" alt="Image" src="https://github.com/user-attachments/assets/7e2fc1b1-3730-4cc0-9b81-e1e2b674c1e3" />
 
 Mobile view:
 
