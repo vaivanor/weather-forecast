@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetchData } from "./utils/useFetchData.js";
+import { useMeteoData } from "./utils/useMeteoData.js";
 import SearchInput from "./components/SearchInput/SearchInput.jsx";
 import { CurrentDayCard } from "./components/CurrentDayCard/CurrentDayCard.jsx";
 
@@ -10,7 +10,7 @@ function App() {
     lon: 25.2797,
   });
 
-  const { data, current, loading, error } = useFetchData({
+  const { data, current, loading, error } = useMeteoData({
     latitude: cityData.lat,
     longitude: cityData.lon,
     timezone: "auto",
