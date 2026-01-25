@@ -1,0 +1,8 @@
+@use "../../styles/variables" as *;
+
+.container {
+  text-align: center;
+  border: 2px solid transparent;
+  box-shadow: 0 0 5px 2px $light-shadow;
+  background-color: $light-color;
+}
