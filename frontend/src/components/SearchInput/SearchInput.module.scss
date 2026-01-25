@@ -13,7 +13,7 @@
     display: inline-block;
     padding: $space-xs;
     border: 2px solid $primary-color;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     width: 100%;
     box-sizing: border-box;
     color: $primary-color;
@@ -40,6 +40,22 @@
       &:hover,
       &:focus {
         background-color: $primary-color-light-hover;
+      }
+    }
+  }
+  .flexContainer {
+    margin-top: $space-base;
+    display: flex;
+    gap: $space-xs;
+    button {
+      cursor: pointer;
+      background-color: $accent-color;
+      color: $light-color;
+      border: none;
+      border-radius: 0.5rem;
+      padding: $space-xs;
+      &:hover {
+        background-color: $accent-hover-color;
       }
     }
   }
